@@ -25,9 +25,11 @@ public class nickteleopisbest extends LinearOpMode {
         DcMotor Cool2 = hardwareMap.get(DcMotor.class, "skib2");
         DcMotor Intake = hardwareMap.get(DcMotor.class,"Intake");
         Servo Test1 = hardwareMap.get(Servo.class, "Servo1");
+        Servo rampA = hardwareMap.get(Servo.class, "RampA");
         //reverses the right side
-        rightf.setDirection(DcMotorSimple.Direction.REVERSE);
         leftf.setDirection(DcMotorSimple.Direction.REVERSE);
+        leftb.setDirection(DcMotorSimple.Direction.REVERSE);
+        rampA.setPosition(0.078);
         //Encoders make the directionals velocity based (RPM)
         waitForStart();
         if (isStopRequested()) {
@@ -43,9 +45,9 @@ public class nickteleopisbest extends LinearOpMode {
             double ispressedLT = gamepad1.left_trigger;
             double ispressedRB = gamepad1.right_trigger;
             //declares the actual controls from the control hub
-            double leftstickx =gamepad1.left_stick_x;
-            double leftsticky = gamepad1.left_stick_y;//-
-            double rightstickx = gamepad1.right_stick_x;
+            double leftstickx =gamepad1.right_stick_x;
+            double leftsticky = -gamepad1.left_stick_y;//-
+            double rightstickx = gamepad1.left_stick_x;
             double rightsticky = gamepad1.right_stick_y;//-
 //Driving variables, formulas to calculate wheel positionality
             //If curious, please refer to various Mechanum wheel guides online
@@ -62,8 +64,7 @@ public class nickteleopisbest extends LinearOpMode {
             leftb.setPower(bleftpower);
             rightf.setPower(frightpower);
             rightb.setPower(brightpower);
-//sets the launching motor's position to 0 when the later called function offsets it
-
+//sets the launching motor's position to 0 when the later called function offsets itb
 //Test code for launcher. Somewhat irrelevant right now (OPEN HOUSE).
             if (ispresseda) {
                 Cool.setPower(.5);
@@ -76,14 +77,14 @@ public class nickteleopisbest extends LinearOpMode {
                     Cool.setPower(0);
                 }
 
-                if (ispressedx) {
+                if (ispressedLT==1) {
                     Intake.setPower(1);
                 } else {
                     Intake.setPower(0);
                 }
                 if (ispressedLT == 1) {
-                    Cool.setPower(1);
-                    Cool2.setPower(1);
+                    Cool.setPower(.95);
+                    Cool2.setPower(.95);
                 } else {
                     Cool.setPower(0);
                     Cool2.setPower(0);
@@ -91,10 +92,16 @@ public class nickteleopisbest extends LinearOpMode {
 
                 }
 
-                    Test1.setPosition(0.085);
+                    Test1.setPosition(0.09);
                     if (ispressedRB == 1) {
-                        Test1.setPosition(0.03);
+                        Test1.setPosition(0.05);
                         sleep(100);
+                    }
+                    if(ispressedy){
+                        rampA.setPosition(0.82);
+                    }
+                    if(gamepad1.dpad_down){
+                        rampA.setPosition(0.078);
                     }
             }
 

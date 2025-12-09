@@ -12,18 +12,28 @@ public class test extends LinearOpMode {
     @Override
     public void runOpMode() throws InterruptedException {
         testMotor1 = hardwareMap.get(DcMotorEx.class,"frontLeftMotor");
-        testMotor2 = hardwareMap.get(DcMotorEx.class,"backLeftMotor");
-        testMotor3 = hardwareMap.get(DcMotorEx.class,"frontRightMotor");
+        testMotor2 = hardwareMap.get(DcMotorEx.class,"frontRightMotor");
+        testMotor3 = hardwareMap.get(DcMotorEx.class,"backLeftMotor");
         testMotor4 = hardwareMap.get(DcMotorEx.class,"backRightMotor");
         testMotor1.setDirection(DcMotorSimple.Direction.REVERSE);
         testMotor2.setDirection(DcMotorSimple.Direction.REVERSE);
         waitForStart();
         while (opModeIsActive()) {
-            double forward = -gamepad1.left_stick_y;
-            testMotor1.setPower(forward);
-            testMotor2.setPower(forward);
-            testMotor3.setPower(forward);
-            testMotor4.setPower(forward);
+            testMotor1.setPower(0);
+            testMotor2.setPower(0);
+            testMotor3.setPower(0);
+            testMotor4.setPower(0);
+            if(gamepad1.a) {
+                testMotor1.setPower(1);
+
+            }else if(gamepad1.b) {
+                testMotor2.setPower(1);
+            }else if(gamepad1.y) {
+                testMotor3.setPower(1);
+            } else if (gamepad1.x) {
+                testMotor4.setPower(1);
+            }
+
 
         }
     }

@@ -51,8 +51,8 @@ public class Teleop2025 extends LinearOpMode {
         }
 
         while(opModeIsActive()) {
-            double y =  gamepad1.left_stick_x;//forward
-            double x =  -gamepad1.left_stick_y;//strafe
+            double y =  -gamepad1.left_stick_y;//forward
+            double x =  gamepad1.left_stick_x;//strafe
             double rx = gamepad1.right_stick_x;//turn
             double lt = gamepad1.left_trigger;
             boolean du = gamepad1.dpad_up;
