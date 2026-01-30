@@ -45,9 +45,9 @@ public class nickteleopisbest extends LinearOpMode {
             boolean ispressedb = gamepad1.b;
             boolean ispressedx = gamepad1.x;
             boolean ispressedy = gamepad1.y;
+            boolean ispressedRBB = gamepad1.right_bumper;
             double ispressedLT = gamepad1.left_trigger;
             double ispressedRB = gamepad1.right_trigger;
-            //declares the actual controls from the control hub
             double leftstickx = gamepad1.right_stick_x;
             double leftsticky = -gamepad1.left_stick_y;//-
             double rightstickx = gamepad1.left_stick_x;
@@ -68,27 +68,41 @@ public class nickteleopisbest extends LinearOpMode {
             rightf.setPower(frightpower);
             rightb.setPower(brightpower);
 
-            if (ispressedLT == 1) {
-                Intake.setPower(1);
-            } else {
-                Intake.setPower(0);
-            }
+            //Intake Button Function
+
+        if (ispressedRBB){
+        Intake.setPower(1);
+        }else {
+            Intake.setPower(0);
+        }
+
+
+
+
             //Front Flywheel
             if (ispressedLT == 1) {
                 Cool2.setPower(.95);
             } else {
                 Cool2.setPower(0);
             }
-            //Actuator test
+            //Actuator Right
             if (ispresseda){
                 liftarm1.setPower(1);
-                liftarm2.setPower(1);
             }else {
                 liftarm1.setPower (0);
-                liftarm2.setPower(0);
             }
             if(ispressedx){
                 liftarm1.setPower(-1);
+
+            }
+            //Actuator Left
+
+            if (ispressedb){
+                liftarm2.setPower(1);
+            }else {
+                liftarm2.setPower (0);
+            }
+            if (ispressedy){
                 liftarm2.setPower(-1);
             }
             //Feeding Servo
